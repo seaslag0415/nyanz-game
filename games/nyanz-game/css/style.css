@@ -1,0 +1,393 @@
+:root {
+    --ink: #2e2724;
+    --muted: #766b65;
+    --paper: #fffaf0;
+    --card: rgba(255, 252, 245, 0.94);
+    --line: #e6d6c1;
+    --red: #b73530;
+    --red-dark: #832723;
+    --gold: #c99a3e;
+    --green: #316b5f;
+    --shadow: 0 18px 45px rgba(55, 37, 27, 0.14);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    color: var(--ink);
+    font-family: 'Hiragino Sans', 'Yu Gothic', 'Meiryo', sans-serif;
+    background:
+        linear-gradient(90deg, rgba(183, 53, 48, 0.08) 1px, transparent 1px),
+        linear-gradient(180deg, rgba(201, 154, 62, 0.12), rgba(255, 250, 240, 0.92)), #f8efe2;
+    background-size:
+        38px 38px,
+        auto,
+        auto;
+}
+
+button {
+    font: inherit;
+}
+
+.site-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    width: min(1120px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 28px 0 18px;
+}
+
+.header-mark {
+    display: grid;
+    place-items: center;
+    width: 58px;
+    height: 58px;
+    border: 3px solid var(--red);
+    border-radius: 50%;
+    color: var(--red-dark);
+    background: var(--paper);
+    font-weight: 800;
+    box-shadow: var(--shadow);
+}
+
+.site-header h1,
+.section-heading h2 {
+    margin: 0;
+    letter-spacing: 0;
+}
+
+.site-header h1 {
+    font-size: clamp(1.75rem, 5vw, 3rem);
+}
+
+.eyebrow {
+    margin: 0 0 5px;
+    color: var(--red-dark);
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0;
+}
+
+.page-shell {
+    display: grid;
+    gap: 18px;
+    width: min(1120px, calc(100% - 32px));
+    margin: 0 auto;
+    padding-bottom: 36px;
+}
+
+.card {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: var(--card);
+    box-shadow: var(--shadow);
+}
+
+.fortune-card,
+.game-card,
+.result-card {
+    padding: clamp(18px, 3vw, 28px);
+}
+
+.fortune-layout {
+    display: grid;
+    grid-template-columns: minmax(220px, 340px) 1fr;
+    gap: 24px;
+    align-items: center;
+    margin-top: 18px;
+}
+
+.photo-frame {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: linear-gradient(135deg, #fff4dc, #f3dfc1);
+}
+
+.cat-photo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.cat-photo.is-missing {
+    display: none;
+}
+
+.photo-fallback {
+    position: absolute;
+    inset: 0;
+    display: none;
+    place-items: center;
+    color: var(--red-dark);
+    font-size: 4rem;
+    font-weight: 900;
+}
+
+.photo-fallback.is-visible {
+    display: grid;
+}
+
+.cat-name {
+    margin: 0 0 16px;
+    color: var(--red-dark);
+    font-size: clamp(1.8rem, 5vw, 3.1rem);
+    font-weight: 900;
+}
+
+.fortune-list {
+    display: grid;
+    gap: 12px;
+    margin: 0;
+}
+
+.fortune-list div {
+    padding-left: 14px;
+    border-left: 4px solid var(--gold);
+}
+
+.fortune-list dt {
+    color: var(--muted);
+    font-size: 0.82rem;
+    font-weight: 800;
+}
+
+.fortune-list dd {
+    margin: 4px 0 0;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.game-top {
+    display: grid;
+    grid-template-columns: 1fr minmax(220px, 360px);
+    gap: 16px;
+    align-items: start;
+}
+
+.effect-panel {
+    padding: 12px 14px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fff7e5;
+}
+
+.effect-panel span,
+.hud span,
+.result-grid span {
+    display: block;
+    color: var(--muted);
+    font-size: 0.78rem;
+    font-weight: 800;
+}
+
+.effect-panel strong {
+    display: block;
+    margin-top: 4px;
+    line-height: 1.5;
+}
+
+.hud,
+.result-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 18px 0 12px;
+}
+
+.hud div,
+.result-grid div {
+    min-width: 0;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    background: #fffdf7;
+}
+
+.hud strong,
+.result-grid strong {
+    display: block;
+    margin-top: 3px;
+    font-size: 1.18rem;
+}
+
+.arena-wrap {
+    position: relative;
+    overflow: hidden;
+    border: 3px solid var(--red-dark);
+    border-radius: 8px;
+    background: #f2d7b0;
+    touch-action: none;
+}
+
+#gameCanvas {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 720 / 520;
+}
+
+.overlay {
+    position: absolute;
+    inset: 0;
+    display: grid;
+    place-items: center;
+    align-content: center;
+    gap: 12px;
+    padding: 24px;
+    text-align: center;
+    background: rgba(255, 250, 240, 0.86);
+}
+
+.overlay.hidden,
+.hidden {
+    display: none;
+}
+
+.overlay-title {
+    margin: 0;
+    font-size: clamp(1.25rem, 4vw, 2rem);
+    font-weight: 900;
+}
+
+.overlay-text {
+    max-width: 440px;
+    margin: 0;
+    color: var(--muted);
+    line-height: 1.7;
+}
+
+.primary-button {
+    min-height: 44px;
+    padding: 10px 20px;
+    border: 0;
+    border-radius: 8px;
+    color: #fff;
+    background: var(--red);
+    font-weight: 900;
+    cursor: pointer;
+    box-shadow: 0 8px 0 var(--red-dark);
+}
+
+.primary-button:active {
+    transform: translateY(3px);
+    box-shadow: 0 5px 0 var(--red-dark);
+}
+
+.mobile-controls {
+    display: none;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin-top: 12px;
+}
+
+.mobile-controls button {
+    min-height: 54px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    color: var(--red-dark);
+    background: #fffdf7;
+    font-size: 1.7rem;
+    font-weight: 900;
+}
+
+.result-card {
+    border-color: rgba(49, 107, 95, 0.35);
+}
+
+.result-grid {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.title-badge {
+    display: inline-block;
+    margin: 10px 0 0;
+    padding: 8px 12px;
+    border: 1px solid rgba(49, 107, 95, 0.28);
+    border-radius: 8px;
+    color: #fff;
+    background: var(--green);
+    font-weight: 900;
+}
+
+.result-comment {
+    margin: 16px 0 18px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.game-site-footer {
+    width: min(1120px, calc(100% - 32px));
+    margin: 0 auto;
+    padding: 10px 0 30px;
+    color: var(--muted);
+    text-align: center;
+}
+
+.game-site-footer p {
+    margin: 5px 0;
+}
+
+.game-site-footer nav + nav {
+    margin-top: 6px;
+}
+
+.game-site-footer a {
+    color: var(--red-dark);
+    font-weight: 800;
+    text-underline-offset: 3px;
+}
+
+@media (max-width: 760px) {
+    .site-header,
+    .page-shell {
+        width: min(100% - 20px, 560px);
+    }
+
+    .site-header {
+        padding-top: 18px;
+    }
+
+    .header-mark {
+        width: 48px;
+        height: 48px;
+    }
+
+    .fortune-layout,
+    .game-top {
+        grid-template-columns: 1fr;
+    }
+
+    .hud {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .result-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .mobile-controls {
+        display: grid;
+    }
+}
+
+@media (max-width: 420px) {
+    .fortune-card,
+    .game-card,
+    .result-card {
+        padding: 14px;
+    }
+
+    .hud div,
+    .result-grid div {
+        padding: 8px 9px;
+    }
+}

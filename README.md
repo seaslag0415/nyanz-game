@@ -1,0 +1,37 @@
+# nyanz-lab
+
+猫たちとの暮らし、自作ブラウザゲーム、Web制作の試みをまとめる個人Webポータルです。
+
+## ローカルでの確認
+
+プロジェクト直下をドキュメントルートにして、HTTPサーバーで確認してください。ルート相対URLを使用しているため、HTMLファイルを直接開く方法ではなく `http://localhost:8000/` からアクセスします。
+
+```powershell
+python -m http.server 8000
+```
+
+## 主な構成
+
+```text
+index.html                     ポータルトップ
+assets/css/common.css          ポータル共通スタイル
+assets/js/common.js            SNS URL共通設定
+games/index.html               ゲーム一覧
+games/nyanz-game/              にゃんず下僕神社（ゲーム本体）
+about/index.html               サイト・にゃんず紹介
+blog/index.html                WordPress導入までの案内ページ
+robots.txt
+sitemap.xml
+```
+
+## SNSリンクの変更
+
+YouTube・X・noteのURLは `assets/js/common.js` の `SOCIAL_LINKS` で一括管理しています。
+
+## Blogについて
+
+現在の `blog/index.html` は準備中ページです。WordPress導入時にこのファイルを置き換え、WordPress関連ファイルは `/blog/` 以下だけで管理します。
+
+## ゲームの保存データ
+
+「にゃんず下僕神社」は、今日の占い結果と今日のベストスコアをブラウザの `localStorage` に保存します。既存の保存キーは移設後も変更していません。

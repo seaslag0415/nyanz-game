@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+            name="description"
+            content="今日の姫様からご神託をいただき、おやつを守って遊ぶブラウザゲーム、にゃんず下僕神社。"
+        />
+        <title>にゃんず下僕神社 | nyanz-lab</title>
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="header-mark" aria-hidden="true">猫</div>
+            <div>
+                <p class="eyebrow">本日のご神託</p>
+                <h1>にゃんず下僕神社</h1>
+            </div>
+        </header>
+
+        <main class="page-shell">
+            <section class="card fortune-card" aria-labelledby="fortune-title">
+                <div class="section-heading">
+                    <p class="eyebrow">今日のにゃんず占い</p>
+                    <h2 id="fortune-title">今日の姫様</h2>
+                </div>
+
+                <div class="fortune-layout">
+                    <div class="photo-frame">
+                        <img id="fortuneImage" alt="" class="cat-photo" />
+                        <div id="fortuneFallback" class="photo-fallback" aria-hidden="true">猫</div>
+                    </div>
+
+                    <div class="fortune-copy">
+                        <p class="cat-name" id="fortuneName">読み込み中</p>
+                        <dl class="fortune-list">
+                            <div>
+                                <dt>今日の運勢</dt>
+                                <dd id="fortuneLuck">-</dd>
+                            </div>
+                            <div>
+                                <dt>一言</dt>
+                                <dd id="fortuneComment">-</dd>
+                            </div>
+                            <div>
+                                <dt>今日の加護</dt>
+                                <dd id="fortuneBlessing">-</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card game-card" aria-labelledby="game-title">
+                <div class="game-top">
+                    <div class="section-heading">
+                        <p class="eyebrow">ミニゲーム</p>
+                        <h2 id="game-title">おやつを守れ！にゃんず襲来</h2>
+                    </div>
+                    <div class="effect-panel">
+                        <span>現在の加護</span>
+                        <strong id="activeEffect">-</strong>
+                    </div>
+                </div>
+
+                <div class="hud" aria-live="polite">
+                    <div>
+                        <span>スコア</span>
+                        <strong id="scoreValue">0</strong>
+                    </div>
+                    <div>
+                        <span>残り</span>
+                        <strong id="timeValue">25.0</strong>
+                    </div>
+                    <div>
+                        <span>回避</span>
+                        <strong id="dodgeValue">0</strong>
+                    </div>
+                    <div>
+                        <span>守り</span>
+                        <strong id="guardValue">0</strong>
+                    </div>
+                </div>
+
+                <div class="arena-wrap">
+                    <canvas
+                        id="gameCanvas"
+                        width="720"
+                        height="520"
+                        aria-label="おやつ皿を左右に動かして、降ってくる猫を避けるゲーム"
+                    ></canvas>
+                    <div id="startOverlay" class="overlay">
+                        <p class="overlay-title">姫様たちからおやつを守る</p>
+                        <p class="overlay-text">
+                            左右キー、画面下のボタン、またはタッチでお皿を動かします。
+                        </p>
+                        <button id="startButton" class="primary-button" type="button">
+                            ゲーム開始
+                        </button>
+                    </div>
+                </div>
+
+                <div class="mobile-controls" aria-label="スマートフォン用操作">
+                    <button id="leftButton" type="button" aria-label="左へ移動">←</button>
+                    <button id="rightButton" type="button" aria-label="右へ移動">→</button>
+                </div>
+            </section>
+
+            <section
+                id="resultCard"
+                class="card result-card hidden"
+                aria-labelledby="result-title"
+                aria-live="polite"
+            >
+                <div class="section-heading">
+                    <p class="eyebrow">おつとめ結果</p>
+                    <h2 id="result-title">ゲーム終了</h2>
+                </div>
+
+                <div class="result-grid">
+                    <div>
+                        <span>スコア</span>
+                        <strong id="resultScore">0</strong>
+                    </div>
+                    <div>
+                        <span>生存時間</span>
+                        <strong id="resultTime">0.0秒</strong>
+                    </div>
+                    <div>
+                        <span>今日のベスト</span>
+                        <strong id="bestScore">0</strong>
+                    </div>
+                </div>
+
+                <p class="title-badge" id="resultTitle">まだ下僕見習い</p>
+                <p class="result-comment" id="resultComment">また挑むにゃ。</p>
+                <button id="retryButton" class="primary-button" type="button">もう一度遊ぶ</button>
+            </section>
+        </main>
+
+        <footer class="game-site-footer">
+            <nav aria-label="フッターナビゲーション">
+                <a href="/">Home</a> / <a href="/games/">Games</a> /
+                <a href="/blog/">Blog</a> / <a href="/about/">About</a>
+            </nav>
+            <nav aria-label="ソーシャルリンク">
+                <a
+                    href="https://www.youtube.com/@nanatsuno071"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >YouTube</a
+                >
+                /
+                <a href="https://x.com/blueudcat22" target="_blank" rel="noopener noreferrer">X</a>
+                /
+                <a
+                    href="https://note.com/aozaki_s"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    >note</a
+                >
+            </nav>
+            <p><small>© nyanz-lab</small></p>
+        </footer>
+
+        <script src="js/script.js"></script>
+    </body>
+</html>
