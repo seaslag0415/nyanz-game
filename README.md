@@ -19,7 +19,7 @@ assets/js/common.js            SNS URL共通設定
 games/index.html               ゲーム一覧
 games/nyanz-game/              にゃんず下僕神社（ゲーム本体）
 about/index.html               サイト・にゃんず紹介
-blog/index.html                WordPress導入までの案内ページ
+wordpress/                     WordPress独自テーマと運用手順
 robots.txt
 sitemap.xml
 ```
@@ -30,7 +30,7 @@ YouTube・X・noteのURLは `assets/js/common.js` の `SOCIAL_LINKS` で一括�
 
 ## Blogについて
 
-現在の `blog/index.html` は準備中ページです。WordPress導入時にこのファイルを置き換え、WordPress関連ファイルは `/blog/` 以下だけで管理します。
+`https://nyanz-lab.sakura.ne.jp/blog/` ではWordPressを運用しています。WordPress本体はサーバー側で管理し、独自テーマと運用手順は `wordpress/` にあります。
 
 ## ゲームの保存データ
 

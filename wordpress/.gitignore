@@ -1,0 +1,7 @@
+# WordPress 本体・実行時データはサーバー側で管理する
+wp-config.php
+wp-content/uploads/
+wp-content/cache/
+wp-content/upgrade/
+*.sql
+*.sql.gz
