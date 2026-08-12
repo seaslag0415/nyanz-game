@@ -7,10 +7,56 @@
             name="description"
             content="猫たちとの暮らし、自作ブラウザゲーム、Web制作の試みをまとめる個人Webポータル、nyanz-lab。"
         />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
         <title>nyanz-lab | にゃんずと作るWeb実験室</title>
+        <link rel="canonical" href="https://nyanz-lab.sakura.ne.jp/" />
+        <meta property="og:locale" content="ja_JP" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="nyanz-lab" />
+        <meta property="og:title" content="nyanz-lab | にゃんずと作るWeb実験室" />
+        <meta
+            property="og:description"
+            content="猫たちとの暮らし、自作ブラウザゲーム、Web制作の試みをまとめる個人Webポータル。"
+        />
+        <meta property="og:url" content="https://nyanz-lab.sakura.ne.jp/" />
+        <meta
+            property="og:image"
+            content="https://nyanz-lab.sakura.ne.jp/assets/images/og/nyanz-lab.jpg"
+        />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:alt" content="香姫の写真" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="nyanz-lab | にゃんずと作るWeb実験室" />
+        <meta
+            name="twitter:description"
+            content="猫たちとの暮らし、自作ブラウザゲーム、Web制作の試みをまとめる個人Webポータル。"
+        />
+        <meta
+            name="twitter:image"
+            content="https://nyanz-lab.sakura.ne.jp/assets/images/og/nyanz-lab.jpg"
+        />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="stylesheet" href="/assets/css/common.css" />
         <script src="/assets/js/common.js" defer></script>
+        <script type="application/ld+json">
+            {
+                "@context": "https://schema.org",
+                "@type": "WebSite",
+                "@id": "https://nyanz-lab.sakura.ne.jp/#website",
+                "url": "https://nyanz-lab.sakura.ne.jp/",
+                "name": "nyanz-lab",
+                "alternateName": "にゃんずと作るWeb実験室",
+                "description": "猫たちとの暮らし、自作ブラウザゲーム、Web制作の試みをまとめる個人Webポータル。",
+                "inLanguage": "ja",
+                "sameAs": [
+                    "https://www.youtube.com/@nanatsuno071",
+                    "https://x.com/blueudcat22",
+                    "https://note.com/aozaki_s",
+                    "https://creator.pixta.jp/@blue_sayo"
+                ]
+            }
+        </script>
     </head>
     <body>
         <a class="skip-link" href="#main-content">本文へ移動</a>
@@ -70,10 +116,12 @@
                 <article class="featured-card">
                     <a class="featured-image" href="/games/nyanz-game/">
                         <img
-                            src="/games/nyanz-game/images/kouhime/fortune001.jpg"
+                            src="/games/nyanz-game/images/kouhime/fortune001-1200.webp"
                             alt="香姫"
                             width="1200"
-                            height="900"
+                            height="798"
+                            loading="lazy"
+                            decoding="async"
                         />
                     </a>
                     <div class="featured-copy">
@@ -127,6 +175,11 @@
                         <span><strong>note</strong><small>記事・文章コンテンツ</small></span>
                         <span class="social-state">準備中</span>
                     </a>
+                    <a class="social-card" data-social="pixta" aria-disabled="true">
+                        <span class="social-icon" aria-hidden="true">P</span>
+                        <span><strong>PIXTA</strong><small>写真素材を販売中</small></span>
+                        <span class="social-state">準備中</span>
+                    </a>
                 </div>
             </section>
         </main>
@@ -141,6 +194,7 @@
                     <a data-social="youtube" aria-disabled="true">YouTube</a>
                     <a data-social="x" aria-disabled="true">X</a>
                     <a data-social="note" aria-disabled="true">note</a>
+                    <a data-social="pixta" aria-disabled="true">PIXTA</a>
                 </nav>
             </div>
             <p class="copyright"><small>© nyanz-lab</small></p>

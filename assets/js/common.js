@@ -5,6 +5,7 @@ const SOCIAL_LINKS = {
     youtube: 'https://www.youtube.com/@nanatsuno071',
     x: 'https://x.com/blueudcat22',
     note: 'https://note.com/aozaki_s',
+    pixta: 'https://creator.pixta.jp/@blue_sayo',
 };
 
 document.querySelectorAll('[data-social]').forEach((link) => {

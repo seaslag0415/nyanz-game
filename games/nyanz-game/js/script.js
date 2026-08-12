@@ -4,8 +4,8 @@ const catData = {
     megohime: {
         name: '愛姫',
         reading: 'めごひめ',
-        fortuneImages: ['images/megohime/fortune001.jpg', 'images/megohime/fortune002.jpg'],
-        gameImages: ['images/megohime/game-attack.png'],
+        fortuneImages: ['images/megohime/fortune001-1200.webp', 'images/megohime/fortune002-1200.webp'],
+        gameImages: ['images/megohime/game-attack.webp'],
         color: '#d95f59',
         fortunes: [
             {
@@ -30,8 +30,8 @@ const catData = {
     iroha: {
         name: 'いろは姫',
         reading: 'いろはひめ',
-        fortuneImages: ['images/iroha/fortune001.jpg', 'images/iroha/fortune002.jpg'],
-        gameImages: ['images/iroha/game-attack.png'],
+        fortuneImages: ['images/iroha/fortune001-1200.webp', 'images/iroha/fortune002-1200.webp'],
+        gameImages: ['images/iroha/game-attack.webp'],
         color: '#6c8fc7',
         fortunes: [
             {
@@ -56,8 +56,8 @@ const catData = {
     kouhime: {
         name: '香姫',
         reading: 'こうひめ',
-        fortuneImages: ['images/kouhime/fortune001.jpg', 'images/kouhime/fortune002.jpg'],
-        gameImages: ['images/kouhime/game-attack.png'],
+        fortuneImages: ['images/kouhime/fortune001-1200.webp', 'images/kouhime/fortune002-1200.webp'],
+        gameImages: ['images/kouhime/game-attack.webp'],
         color: '#b4812f',
         fortunes: [
             {
