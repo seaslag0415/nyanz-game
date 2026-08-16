@@ -98,8 +98,14 @@
                         <h2 id="game-title">おやつを守れ！にゃんず襲来</h2>
                     </div>
                     <div class="effect-panel">
-                        <span>現在の加護</span>
-                        <strong id="activeEffect">-</strong>
+                        <div>
+                            <span>選択モード</span>
+                            <strong id="activeMode">未選択</strong>
+                        </div>
+                        <div>
+                            <span>現在の加護</span>
+                            <strong id="activeEffect">-</strong>
+                        </div>
                     </div>
                 </div>
 
@@ -109,8 +115,16 @@
                         <strong id="scoreValue">0</strong>
                     </div>
                     <div>
-                        <span>残り</span>
-                        <strong id="timeValue">25.0</strong>
+                        <span>経過</span>
+                        <strong id="timeValue">00:00</strong>
+                    </div>
+                    <div>
+                        <span>速度</span>
+                        <strong id="speedValue">×1.00</strong>
+                    </div>
+                    <div>
+                        <span>BEST</span>
+                        <strong id="hudBestValue">0</strong>
                     </div>
                     <div>
                         <span>回避</span>
@@ -130,12 +144,27 @@
                         aria-label="おやつ皿を左右に動かして、降ってくる猫を避けるゲーム"
                     ></canvas>
                     <div id="startOverlay" class="overlay">
-                        <p class="overlay-title">姫様たちからおやつを守る</p>
-                        <p class="overlay-text">
+                        <p id="overlayTitle" class="overlay-title">遊び方を選ぶ</p>
+                        <p id="overlayText" class="overlay-text">
                             左右キー、画面下のボタン、またはタッチでお皿を動かします。
                         </p>
-                        <button id="startButton" class="primary-button" type="button">
-                            ゲーム開始
+                        <div id="modeSelection" class="mode-selection" aria-label="ゲームモード選択">
+                            <button class="mode-button" type="button" data-mode="normal" aria-pressed="false">
+                                <strong>普通モード</strong>
+                                <span>いつものにゃんず。時間が経つほど少しずつ速くなります。</span>
+                                <small>BEST <b id="normalBestValue">0</b></small>
+                            </button>
+                            <button class="mode-button rampage" type="button" data-mode="rampage" aria-pressed="false">
+                                <strong>暴走モード</strong>
+                                <span>にゃんずが本気を出します。特に香姫は止まりません。</span>
+                                <small>BEST <b id="rampageBestValue">0</b></small>
+                            </button>
+                        </div>
+                        <button id="startButton" class="primary-button" type="button" disabled>
+                            モードを選んで開始
+                        </button>
+                        <button id="overlayModeButton" class="secondary-button hidden" type="button">
+                            モード選択に戻る
                         </button>
                     </div>
                 </div>
@@ -164,17 +193,24 @@
                     </div>
                     <div>
                         <span>生存時間</span>
-                        <strong id="resultTime">0.0秒</strong>
+                        <strong id="resultTime">00:00</strong>
                     </div>
                     <div>
-                        <span>今日のベスト</span>
+                        <span id="bestScoreLabel">モード別BEST</span>
                         <strong id="bestScore">0</strong>
                     </div>
                 </div>
 
                 <p class="title-badge" id="resultTitle">まだ下僕見習い</p>
                 <p class="result-comment" id="resultComment">また挑むにゃ。</p>
-                <button id="retryButton" class="primary-button" type="button">もう一度遊ぶ</button>
+                <div class="result-actions">
+                    <button id="retryButton" class="primary-button" type="button">
+                        同じモードでもう一度
+                    </button>
+                    <button id="modeSelectButton" class="secondary-button" type="button">
+                        モード選択に戻る
+                    </button>
+                </div>
             </section>
         </main>
 

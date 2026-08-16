@@ -174,10 +174,17 @@ button {
 }
 
 .effect-panel {
+    display: grid;
+    gap: 10px;
     padding: 12px 14px;
     border: 1px solid var(--line);
     border-radius: 8px;
     background: #fff7e5;
+}
+
+.effect-panel div + div {
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
 }
 
 .effect-panel span,
@@ -198,7 +205,7 @@ button {
 .hud,
 .result-grid {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
+    grid-template-columns: repeat(6, 1fr);
     gap: 10px;
     margin: 18px 0 12px;
 }
@@ -228,6 +235,19 @@ button {
     touch-action: none;
 }
 
+/* PCではウィンドウの高さに合わせてゲーム盤を縮小し、元画像以上には拡大しない。 */
+@media (min-width: 761px) {
+    .arena-wrap {
+        width: min(100%, clamp(460px, calc(100dvh - 40px), 800px));
+        margin-inline: auto;
+    }
+}
+
+.arena-wrap.rampage-mode {
+    border-color: #92391f;
+    box-shadow: 0 0 0 3px rgba(201, 154, 62, 0.16);
+}
+
 #gameCanvas {
     display: block;
     width: 100%;
@@ -247,9 +267,19 @@ button {
     background: rgba(255, 250, 240, 0.86);
 }
 
+.arena-wrap.overlay-visible {
+    min-height: min(520px, max(390px, 72vw));
+}
+
+@media (min-width: 761px) {
+    .arena-wrap.overlay-visible {
+        min-height: min(520px, max(390px, calc(100dvh - 220px)));
+    }
+}
+
 .overlay.hidden,
 .hidden {
-    display: none;
+    display: none !important;
 }
 
 .overlay-title {
@@ -263,6 +293,58 @@ button {
     margin: 0;
     color: var(--muted);
     line-height: 1.7;
+}
+
+.mode-selection {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    width: min(580px, 100%);
+}
+
+.mode-button {
+    min-width: 0;
+    padding: 12px;
+    border: 2px solid var(--line);
+    border-radius: 8px;
+    color: var(--ink);
+    background: rgba(255, 253, 247, 0.96);
+    text-align: left;
+    cursor: pointer;
+}
+
+.mode-button strong,
+.mode-button span,
+.mode-button small {
+    display: block;
+}
+
+.mode-button strong {
+    color: var(--red-dark);
+    font-size: 1.04rem;
+}
+
+.mode-button span {
+    margin-top: 5px;
+    color: var(--muted);
+    font-size: 0.78rem;
+    line-height: 1.45;
+}
+
+.mode-button small {
+    margin-top: 7px;
+    color: var(--green);
+    font-weight: 800;
+}
+
+.mode-button.rampage strong {
+    color: #a14224;
+}
+
+.mode-button[aria-pressed='true'] {
+    border-color: var(--red);
+    background: #fff4dc;
+    box-shadow: 0 0 0 2px rgba(183, 53, 48, 0.14);
 }
 
 .primary-button {
@@ -280,6 +362,23 @@ button {
 .primary-button:active {
     transform: translateY(3px);
     box-shadow: 0 5px 0 var(--red-dark);
+}
+
+.primary-button:disabled {
+    cursor: not-allowed;
+    opacity: 0.48;
+    box-shadow: 0 5px 0 #9b827e;
+}
+
+.secondary-button {
+    min-height: 44px;
+    padding: 9px 18px;
+    border: 1px solid var(--red-dark);
+    border-radius: 8px;
+    color: var(--red-dark);
+    background: #fffdf7;
+    font-weight: 900;
+    cursor: pointer;
 }
 
 .mobile-controls {
@@ -322,6 +421,13 @@ button {
     margin: 16px 0 18px;
     font-size: 1.05rem;
     line-height: 1.7;
+}
+
+.result-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
 }
 
 .game-site-footer {
@@ -367,7 +473,7 @@ button {
     }
 
     .hud {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(3, 1fr);
     }
 
     .result-grid {
@@ -389,5 +495,27 @@ button {
     .hud div,
     .result-grid div {
         padding: 8px 9px;
+    }
+
+    .hud {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .overlay {
+        gap: 9px;
+        padding: 14px;
+    }
+
+    .mode-button {
+        padding: 9px;
+    }
+
+    .mode-button span {
+        font-size: 0.71rem;
+    }
+
+    .result-actions {
+        align-items: stretch;
+        flex-direction: column;
     }
 }
