@@ -1,0 +1,142 @@
+<!doctype html>
+<html lang="ja">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta
+            name="description"
+            content="三枚銭法で六爻を立て、本卦・変爻・之卦を調べる猫又易占です。"
+        />
+        <title>猫又易占 | nyanz-lab</title>
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+        <link rel="canonical" href="https://nyanz-lab.sakura.ne.jp/games/nekoma-eki/" />
+        <meta property="og:locale" content="ja_JP" />
+        <meta property="og:type" content="website" />
+        <meta property="og:site_name" content="nyanz-lab" />
+        <meta property="og:title" content="猫又易占 | nyanz-lab" />
+        <meta
+            property="og:description"
+            content="猫又三姫と三枚の銭で占う易占い。いまの卦と移ろいゆく卦から、あなたへの言葉を読み解きます。"
+        />
+        <meta property="og:url" content="https://nyanz-lab.sakura.ne.jp/games/nekoma-eki/" />
+        <meta
+            property="og:image"
+            content="https://nyanz-lab.sakura.ne.jp/games/nekoma-eki/images/guardians/megohime-01.png"
+        />
+        <meta property="og:image:alt" content="猫又易占の守護者・愛姫" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+        <link rel="stylesheet" href="css/style.css" />
+    </head>
+    <body>
+        <header class="page-header">
+            <p>にゃんず下僕神社</p>
+            <h1>猫又易占</h1>
+            <p class="lead">三枚の銭を六度投げ、いまの卦と移ろいゆく卦を立てます。</p>
+        </header>
+
+        <main class="page-shell">
+            <section class="card cast-panel" aria-labelledby="cast-title">
+                <h2 id="cast-title">卦を作る（六爻を立てる）</h2>
+                <div class="cast-guide">
+                    <div class="cast-guide-text">
+                        <p>
+                            易占では、陰と陽を表す6本の線を重ねて「卦（か）」を作ります。この1本1本の線が「爻（こう）」です。
+                        </p>
+                        <p>
+                            線は、一番下から順に決めます。1回目の結果が初爻（一番下）、2回目が二爻。その後も下から上へ積み上げ、6回目が上爻（一番上）になります。
+                        </p>
+                        <p>6本すべて決まると、今回の占いに使う卦が完成します。</p>
+                        <ul class="cast-legend" aria-label="陰と陽の線">
+                            <li>
+                                <span class="guide-line" aria-hidden="true"></span
+                                ><span>陽爻（ようこう）：つながった線</span>
+                            </li>
+                            <li>
+                                <span class="guide-line guide-line-yin" aria-hidden="true"></span
+                                ><span>陰爻（いんこう）：中央が分かれた線</span>
+                            </li>
+                        </ul>
+                    </div>
+                    <figure class="cast-diagram">
+                        <figcaption>卦の積み上げ方（例）</figcaption>
+                        <ol class="cast-order" reversed>
+                            <li>
+                                <span>上爻</span
+                                ><span class="guide-line" role="img" aria-label="陽爻"></span
+                                ><span>6回目</span>
+                            </li>
+                            <li>
+                                <span>五爻</span
+                                ><span
+                                    class="guide-line guide-line-yin"
+                                    role="img"
+                                    aria-label="陰爻"
+                                ></span
+                                ><span>5回目</span>
+                            </li>
+                            <li>
+                                <span>四爻</span
+                                ><span class="guide-line" role="img" aria-label="陽爻"></span
+                                ><span>4回目</span>
+                            </li>
+                            <li>
+                                <span>三爻</span
+                                ><span
+                                    class="guide-line guide-line-yin"
+                                    role="img"
+                                    aria-label="陰爻"
+                                ></span
+                                ><span>3回目</span>
+                            </li>
+                            <li>
+                                <span>二爻</span
+                                ><span class="guide-line" role="img" aria-label="陽爻"></span
+                                ><span>2回目</span>
+                            </li>
+                            <li>
+                                <span>初爻</span
+                                ><span
+                                    class="guide-line guide-line-yin"
+                                    role="img"
+                                    aria-label="陰爻"
+                                ></span
+                                ><span>1回目</span>
+                            </li>
+                        </ol>
+                        <p class="cast-start">
+                            <span aria-hidden="true">↑</span><br />ここから作る
+                        </p>
+                    </figure>
+                </div>
+                <p class="cast-instruction">
+                    下のボタンを1回押すと、猫又が三枚の銭を6回投げ、卦を作ってくれます。
+                </p>
+                <button id="cast-button" class="cast-button" type="button">
+                    猫又に銭を投げてもらう
+                </button>
+            </section>
+
+            <section class="card reading-layout" aria-live="polite">
+                <div>
+                    <h2>六爻</h2>
+                    <ol id="lines" class="yao-list" aria-label="上爻から初爻までの六爻">
+                        <li>ボタンを押すと、ここに六爻が現れます。</li>
+                    </ol>
+                </div>
+                <div id="result" class="result-area" hidden></div>
+            </section>
+        </main>
+
+        <footer class="page-footer">
+            <a href="/games/">ゲーム一覧へ</a> · <a href="/">nyanz-lab ホームへ</a>
+        </footer>
+
+        <script src="js/trigram-data.js"></script>
+        <script src="js/guardian-data.js"></script>
+        <script src="js/hexagram-interpretations.js"></script>
+        <script src="js/hexagram-data.js"></script>
+        <script src="js/divination.js"></script>
+        <script src="js/app.js"></script>
+    </body>
+</html>

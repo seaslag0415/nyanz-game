@@ -1,0 +1,104 @@
+name: Deploy to Sakura
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+    inputs:
+      dry_run:
+        description: '転送予定だけを確認する（ファイルを更新しない）'
+        type: boolean
+        default: true
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sakura-production
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    env:
+      SAKURA_HOST: ${{ secrets.SAKURA_HOST }}
+      SAKURA_USER: ${{ secrets.SAKURA_USER }}
+      SAKURA_DEPLOY_PATH: ${{ secrets.SAKURA_DEPLOY_PATH }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+        with:
+          persist-credentials: false
+
+      - name: Prepare public files
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p "$RUNNER_TEMP/public"
+          cp index.html favicon.ico robots.txt sitemap.xml google5961297789dbd940.html "$RUNNER_TEMP/public/"
+          rsync -r --exclude='tests/' --exclude='*.md' --exclude='.*' \
+            assets about games "$RUNNER_TEMP/public/"
+          mkdir -p "$RUNNER_TEMP/public/blog/wp-content/themes/nyanz-lab-blog"
+          rsync -r --exclude='*.md' --exclude='.*' \
+            wordpress/themes/nyanz-lab-blog/ \
+            "$RUNNER_TEMP/public/blog/wp-content/themes/nyanz-lab-blog/"
+
+      - name: Configure SSH
+        shell: bash
+        env:
+          SSH_PRIVATE_KEY: ${{ secrets.SAKURA_SSH_PRIVATE_KEY }}
+          SSH_KNOWN_HOSTS: ${{ secrets.SAKURA_SSH_KNOWN_HOSTS }}
+        run: |
+          set -euo pipefail
+          : "${SAKURA_HOST:?Set SAKURA_HOST in repository secrets}"
+          : "${SAKURA_USER:?Set SAKURA_USER in repository secrets}"
+          : "${SAKURA_DEPLOY_PATH:?Set SAKURA_DEPLOY_PATH in repository secrets}"
+          : "${SSH_PRIVATE_KEY:?Set SAKURA_SSH_PRIVATE_KEY in repository secrets}"
+          : "${SSH_KNOWN_HOSTS:?Set SAKURA_SSH_KNOWN_HOSTS in repository secrets}"
+          [[ "$SAKURA_HOST" =~ ^[a-zA-Z0-9][a-zA-Z0-9.-]*$ ]]
+          [[ "$SAKURA_USER" =~ ^[a-zA-Z0-9][a-zA-Z0-9_-]*$ ]]
+          [[ "$SAKURA_DEPLOY_PATH" =~ ^/home/[a-zA-Z0-9_-]+/www(/[a-zA-Z0-9_.-]+)*/?$ ]]
+          [[ "$SAKURA_DEPLOY_PATH" != *'/../'* && "$SAKURA_DEPLOY_PATH" != */.. ]]
+          [[ "$SAKURA_DEPLOY_PATH" != *'/./'* && "$SAKURA_DEPLOY_PATH" != */. ]]
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/sakura_deploy
+          printf '%s\n' "$SSH_KNOWN_HOSTS" | tr -d '\r' > ~/.ssh/known_hosts
+          chmod 600 ~/.ssh/sakura_deploy ~/.ssh/known_hosts
+          cat > ~/.ssh/config <<EOF
+          Host sakura-deploy
+            HostName $SAKURA_HOST
+            User $SAKURA_USER
+            Port 22
+            IdentityFile ~/.ssh/sakura_deploy
+            IdentitiesOnly yes
+            BatchMode yes
+            StrictHostKeyChecking yes
+            ConnectTimeout 20
+          EOF
+          chmod 600 ~/.ssh/config
+
+      - name: Check destination
+        shell: bash
+        run: |
+          set -euo pipefail
+          ssh sakura-deploy "command -v rsync >/dev/null && test -d '$SAKURA_DEPLOY_PATH' && test -w '$SAKURA_DEPLOY_PATH'"
+
+      - name: Upload site and WordPress theme
+        shell: bash
+        env:
+          DRY_RUN: ${{ github.event_name == 'workflow_dispatch' && inputs.dry_run }}
+        run: |
+          set -euo pipefail
+          options=(-rlptz --checksum --delay-updates --itemize-changes --chmod=D755,F644)
+          if [[ "$DRY_RUN" == 'true' ]]; then
+            options+=(--dry-run)
+          fi
+          rsync "${options[@]}" -e ssh "$RUNNER_TEMP/public/" \
+            "sakura-deploy:${SAKURA_DEPLOY_PATH%/}/"
+
+      - name: Remove SSH credentials
+        if: always()
+        shell: bash
+        run: rm -f ~/.ssh/sakura_deploy ~/.ssh/known_hosts ~/.ssh/config

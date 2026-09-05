@@ -52,4 +52,11 @@
             <image:loc>https://nyanz-lab.sakura.ne.jp/assets/images/cats/kouhime.webp</image:loc>
         </image:image>
     </url>
+    <url>
+        <loc>https://nyanz-lab.sakura.ne.jp/games/nekoma-eki/</loc>
+        <lastmod>2026-09-05</lastmod>
+        <image:image>
+            <image:loc>https://nyanz-lab.sakura.ne.jp/games/nekoma-eki/images/guardians/megohime-01.png</image:loc>
+        </image:image>
+    </url>
 </urlset>
