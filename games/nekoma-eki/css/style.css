@@ -63,6 +63,15 @@ button { font: inherit; }
 .cast-diagram .cast-start { margin: 8px 0 0; color: var(--primary-dark); font-weight: 700; line-height: 1.4; }
 .cast-instruction { font-size: 0.9rem; }
 
+.nekoma-coin-illustration {
+    display: block;
+    width: 100%;
+    max-width: 640px;
+    height: auto;
+    margin: 24px auto;
+    border-radius: 12px;
+}
+
 .cast-button {
     min-height: 52px;
     padding: 12px 24px;
